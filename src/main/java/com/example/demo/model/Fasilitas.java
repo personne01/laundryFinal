@@ -1,15 +1,14 @@
 package com.example.demo.model;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "fasilitas")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Fasilitas {
-    public Fasilitas(Long id, String fasilitas, Integer harga, Laundry laundry) {
-        this.id = id;
-        this.fasilitas = fasilitas;
-        this.harga = harga;
-        this.laundry = laundry;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,39 +18,4 @@ public class Fasilitas {
     @ManyToOne
     @JoinColumn(name = "id_laundry", referencedColumnName = "id")
     private Laundry laundry;
-
-    public Fasilitas() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFasilitas() {
-        return fasilitas;
-    }
-
-    public void setFasilitas(String fasilitas) {
-        this.fasilitas = fasilitas;
-    }
-
-    public Integer getHarga() {
-        return harga;
-    }
-
-    public void setHarga(Integer harga) {
-        this.harga = harga;
-    }
-
-    public Laundry getLoundry() {
-        return laundry;
-    }
-
-    public void setLoundry(Laundry laundry) {
-        this.laundry = laundry;
-    }
 }

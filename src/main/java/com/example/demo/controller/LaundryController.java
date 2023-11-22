@@ -1,35 +1,36 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.dto.LaundryRequestDTO;
+import com.example.demo.dto.response.LaundryRequestDto;
+import com.example.demo.dto.response.LaundryResponseDto;
+import com.example.demo.model.Laundry;
 import com.example.demo.service.LaundryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/v1/laundry")
-
+@RequiredArgsConstructor
 public class LaundryController {
     private final LaundryService service;
-
-    public LaundryController(LaundryService service) {
-        this.service = service;
-    }
-
     @PostMapping
-    public ResponseEntity create(@RequestBody LaundryRequestDTO dto) {
-        return ResponseEntity.ok(service.create(dto));
+    public ResponseEntity create(@RequestBody LaundryRequestDto requestDto) {
+        return ResponseEntity.ok(service.create(requestDto));
     }
 
-    @GetMapping
-    public ResponseEntity getAll(@RequestParam(name = "lokasi", required = false) String lokasi) {
-        return ResponseEntity.ok(service.getAll(lokasi));
+    @GetMapping()
+    public List<Laundry> getAll() {
+        return service.getAll();
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(service.get(id));
+    @GetMapping("/{id}")
+    public LaundryResponseDto get(@PathVariable("id") Long id) {
+        return service.getById(id);
     }
 
 }
