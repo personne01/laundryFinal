@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LaundryController {
     private final LaundryService service;
-    @PostMapping
+    @PostMapping()
     public ResponseEntity create(@RequestBody LaundryRequestDto requestDto) {
         return ResponseEntity.ok(service.create(requestDto));
     }
@@ -28,9 +28,18 @@ public class LaundryController {
         return service.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/details/{id}")
     public LaundryResponseDto get(@PathVariable("id") Long id) {
         return service.getById(id);
+    }
+    @GetMapping("/lokasi")
+    public ResponseEntity<List<Laundry>> getDataByLokasi(@RequestParam(name = "lokasi") String lokasi) {
+        List<Laundry> data = service.getByLokasi(lokasi);
+        if (!data.isEmpty()) {
+            return ResponseEntity.ok(data);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

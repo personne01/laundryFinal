@@ -35,7 +35,7 @@ public class LaundryService {
         return laundryRepository.findAll();
     }
 
-    public List<Laundry> getByLocation(String lokasi){
+    public List<Laundry> getByLokasi(String lokasi){
         return laundryRepository.findAllByLokasiLike(lokasi);
     }
 

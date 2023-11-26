@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
-    HttpServletRequest servletRequest;
 
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthenticationResponse> create(@RequestBody SigninRequest signinRequest) {
